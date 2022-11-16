@@ -3,7 +3,7 @@ FROM registry.cn-shenzhen.aliyuncs.com/yansongda/skeleton:hyperf-7.4
 LABEL maintainer="yansongda <me@yansongda.cn>"
 
 # amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
-RUN if (( $(uname -a | grep -c "x86_64") >= 1 )); then \
+RUN if (( $(uname -a | grep -c x86_64) >= 1 )); then \
         sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/repositories; \
         apk add -U --no-cache --virtual .build-deps $DEPENDENCIES; \
         apk add -U --no-cache librdkafka-dev libxml2-dev unixodbc-dev; \
