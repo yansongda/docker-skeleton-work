@@ -4,7 +4,6 @@ LABEL maintainer="yansongda <me@yansongda.cn>"
 
 # amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
 RUN uname -a \
-    && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then echo "x86_64"; fi \
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
         sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/repositories; \
         apk add -U --no-cache --virtual .build-deps $DEPENDENCIES; \
