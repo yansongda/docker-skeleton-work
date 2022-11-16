@@ -8,7 +8,7 @@ RUN sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/re
     && pecl install -o -f rdkafka-5.0.2 sqlsrv-5.10.1 pdo_sqlsrv-5.10.1 \
     && docker-php-ext-install soap \
     && docker-php-ext-enable rdkafka sqlsrv pdo_sqlsrv \
-    && php -m \
+    && php -m && uname -a \
 # for sqlsvr 只有 amd64 才有
     && if (( $(uname -a | grep -c "x86_64") >= 1 )); then curl -O https://download.microsoft.com/download/e/4/e/e4e67866-dffd-428c-aac7-8d28ddafb39b/msodbcsql17_17.9.1.1-1_amd64.apk && apk add --allow-untrusted msodbcsql17_17.9.1.1-1_amd64.apk; fi \
 # Clean
