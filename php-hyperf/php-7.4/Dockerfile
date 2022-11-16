@@ -2,7 +2,7 @@ FROM registry.cn-shenzhen.aliyuncs.com/yansongda/skeleton:hyperf-7.4
 
 LABEL maintainer="yansongda <me@yansongda.cn>"
 
-RUN && sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/repositories \
+RUN sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/repositories \
     && apk add -U --no-cache --virtual .build-deps $DEPENDENCIES \
     && apk add -U --no-cache librdkafka-dev libxml2-dev unixodbc-dev \
     && pecl install -o -f rdkafka-5.0.2 sqlsrv-5.10.1 pdo_sqlsrv-5.10.1 \
