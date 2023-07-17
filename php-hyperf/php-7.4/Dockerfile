@@ -7,7 +7,7 @@ RUN uname -a \
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
         sed -i 's/mirrors.tuna.tsinghua.edu.cn/dl-cdn.alpinelinux.org/g' /etc/apk/repositories; \
         apk add -U --no-cache --virtual .build-deps $DEPENDENCIES; \
-        apk add -U --no-cache librdkafka-dev libxml2-dev unixodbc-dev; \
+        apk add -U --no-cache librdkafka-dev libxml2-dev unixodbc-dev sox; \
         pecl install -o -f rdkafka-5.0.2 sqlsrv-5.10.1 pdo_sqlsrv-5.10.1; \
         docker-php-ext-install soap; \
         docker-php-ext-enable rdkafka sqlsrv pdo_sqlsrv; \
@@ -21,5 +21,5 @@ RUN uname -a \
         cd && rm -rf $BUILD_DIR; \
         # For me
         sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories; \
-        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv; \
+        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && sox --version; \
     fi
