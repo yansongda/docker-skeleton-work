@@ -1,4 +1,4 @@
-FROM registry.cn-shenzhen.aliyuncs.com/yansongda/skeleton:hyperf-7.4
+FROM yansongda/skeleton:hyperf-7.4
 
 LABEL maintainer="yansongda <me@yansongda.cn>"
 
