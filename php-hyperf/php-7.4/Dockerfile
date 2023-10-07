@@ -13,8 +13,8 @@ RUN uname -a \
         docker-php-ext-enable rdkafka sqlsrv pdo_sqlsrv; \
         php -m && uname -a; \
         # for sqlsvr
-        curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc; \
-        curl https://packages.microsoft.com/config/debian/11/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list; \
+        curl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/trusted.gpg.d/microsoft.asc; \
+        curl https://packages.microsoft.com/config/debian/11/prod.list | tee /etc/apt/sources.list.d/mssql-release.list; \
         apt-get update; \
         ACCEPT_EULA=Y apt-get install -y msodbcsql17; \
         # Clean
