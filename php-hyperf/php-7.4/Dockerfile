@@ -5,6 +5,7 @@ LABEL maintainer="yansongda <me@yansongda.cn>"
 # amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
 RUN uname -a \
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
+        chmod 1777 /tmp; \
         apt-get update; \
         apt-get install -y $DEPENDENCIES; \
         apt-get install -y librdkafka-dev libxml2-dev unixodbc-dev sox; \
