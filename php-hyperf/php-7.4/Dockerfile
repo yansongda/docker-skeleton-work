@@ -23,5 +23,5 @@ RUN uname -a \
         apt-get purge -y --auto-remove \
         rm -rf /var/lib/apt/lists/* /tmp/pear ~/.pearrc \
         # For me
-        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && sox --version \
+        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && sox --version; \
     fi
