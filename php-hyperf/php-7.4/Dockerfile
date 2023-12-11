@@ -31,7 +31,7 @@ RUN uname -a \
         php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && sox --version; \
     else \
         # for kdb
-        cp /tep/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
+        cp /tep/extensions/kdb/ark64/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/kdb.ini; \
         # For me
         php --ri pdo_kdb; \
