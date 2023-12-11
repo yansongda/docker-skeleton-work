@@ -22,6 +22,7 @@ RUN uname -a \
         ACCEPT_EULA=Y apt-get install -y msodbcsql17; \
         # for kdb
         cp /tmp/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
+        ls -al /usr/local/lib/php/extensions/no-debug-non-zts-20190902; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # Clean
         apt-get -y remove $DEPENDENCIES; \
@@ -31,8 +32,8 @@ RUN uname -a \
         php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && sox --version; \
     else \
         # for kdb
+        cp /tmp/extensions/kdb/arm64/* /lib/; \
         cp /tmp/extensions/kdb/arm64/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
-        ls -al /tmp/extensions/kdb/arm64; \
         ls -al /usr/local/lib/php/extensions/no-debug-non-zts-20190902; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # Clean
