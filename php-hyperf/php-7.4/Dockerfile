@@ -26,7 +26,7 @@ RUN uname -a \
         # Clean
         apt-get -y remove $DEPENDENCIES; \
         apt-get purge -y --auto-remove; \
-        rm -rf /var/lib/apt/lists/* /tmp/pear ~/.pearrc; \
+        rm -rf /var/lib/apt/lists/* /tmp ~/.pearrc; \
         # For me
         php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && sox --version; \
     else \
@@ -35,6 +35,8 @@ RUN uname -a \
         ls -al /tmp/extensions/kdb/arm64; \
         ls -al /usr/local/lib/php/extensions/no-debug-non-zts-20190902; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
+        # Clean
+        rm -rf /tmp; \
         # For me
         php --ri pdo_kdb; \
     fi
