@@ -2,8 +2,10 @@ FROM yansongda/skeleton:hyperf-7.4
 
 LABEL maintainer="yansongda <me@yansongda.cn>"
 
-# amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
+COPY extensions /tmp/extensions
+
 RUN uname -a \
+    # amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
         chmod 1777 /tmp; \
         apt-get update; \
@@ -18,10 +20,19 @@ RUN uname -a \
         curl https://packages.microsoft.com/config/debian/11/prod.list | tee /etc/apt/sources.list.d/mssql-release.list; \
         apt-get update; \
         ACCEPT_EULA=Y apt-get install -y msodbcsql17; \
+        # for kdb
+        cp /tep/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
+        echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/kdb.ini; \
         # Clean
         apt-get -y remove $DEPENDENCIES; \
         apt-get purge -y --auto-remove; \
         rm -rf /var/lib/apt/lists/* /tmp/pear ~/.pearrc; \
         # For me
-        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && sox --version; \
+        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && sox --version; \
+    else \
+        # for kdb
+        cp /tep/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
+        echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/kdb.ini; \
+        # For me
+        php --ri pdo_kdb; \
     fi
