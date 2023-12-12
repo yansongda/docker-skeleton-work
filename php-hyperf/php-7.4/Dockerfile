@@ -23,6 +23,7 @@ RUN set -ex \
         apt-get update; \
         ACCEPT_EULA=Y apt-get install -y msodbcsql17; \
         # for kdb
+        cp /tmp/extensions/kdb/x86/* /lib/; \
         cp /tmp/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # For me
