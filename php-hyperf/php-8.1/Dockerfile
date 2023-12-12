@@ -10,13 +10,13 @@ RUN set -ex \
     && sed -i 's/memory_limit = 512M/memory_limit = 1024M/g' /usr/local/etc/php/php.ini \
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
         # for kdb
-        cp /tmp/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20220829/; \
+        cp /tmp/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # For me
         php --ri pdo_kdb; \
     else \
         # for kdb
-        cp /tmp/extensions/kdb/arm64/* /usr/local/lib/php/extensions/no-debug-non-zts-20220829/; \
+        cp /tmp/extensions/kdb/arm64/* /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # For me
         php --ri pdo_kdb; \
