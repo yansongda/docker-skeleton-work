@@ -28,3 +28,7 @@ RUN set -ex \
     && apt-get -y remove $DEPENDENCIES \
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/* /tmp ~/.pearrc
+
+EXPOSE 8080 8888 8889
+
+ENTRYPOINT ["php", "/www/bin/hyperf.php", "start"]
