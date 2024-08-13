@@ -8,7 +8,7 @@ RUN set -ex \
     && uname -a \
     && echo "swoole.use_shortname = 'Off'" >> /usr/local/etc/php/php.ini \
     && sed -i 's/memory_limit = 512M/memory_limit = 1024M/g' /usr/local/etc/php/php.ini \
-    && apt-get -y install vim unzip \
+    && apt-get update && apt-get -y install vim unzip \
     # 解压 zip 扩展
     && cd /tmp/extensions/ && unzip dm.zip && unzip kdb.zip \
     # amd64 才安装 kafka sqlsrv 等扩展， arm64 的不处理
