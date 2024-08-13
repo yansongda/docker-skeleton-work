@@ -18,7 +18,9 @@ RUN set -ex \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # for dm
         mkdir -p /etc/ld.so.conf.d && cp /tmp/extensions/dm/x86/* /etc/ld.so.conf.d/; \
-        echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf && rm -rf /etc/ld.so.cache && echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf; \
+        echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf; \
+        rm -rf /etc/ld.so.cache; \
+        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf; \
         cp /tmp/extensions/dm/x86/php81_pdo_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
         echo "extension=php81_pdo_dm" > /usr/local/etc/php/conf.d/pdo_dm.ini; \
         # For me
