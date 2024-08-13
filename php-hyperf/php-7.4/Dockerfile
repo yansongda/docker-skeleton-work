@@ -32,7 +32,7 @@ RUN set -ex \
         # for dm
         mkdir -p /etc/ld.so.conf.d && cp /tmp/extensions/dm/x86/* /etc/ld.so.conf.d/; \
         echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf && rm -rf /etc/ld.so.cache; \
-        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && ldconfig; \
+        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && ldconfig -n /etc/ld.so.conf.d; \
         cp /tmp/extensions/dm/x86/php74_pdo_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
         echo "extension=php74_pdo_dm" > /usr/local/etc/php/conf.d/pdo_dm.ini; \
         # For me
