@@ -8,7 +8,7 @@ RUN set -ex \
     && uname -a \
     && echo "swoole.use_shortname = 'Off'" >> /usr/local/etc/php/php.ini \
     && sed -i 's/memory_limit = 512M/memory_limit = 1024M/g' /usr/local/etc/php/php.ini \
-    && apt-get update && apt-get -y install vim unzip \
+    && chmod 777 /tmp && apt-get update && apt-get -y install vim unzip \
     # 解压 zip 扩展
     && cd /tmp/extensions/ && unzip dm.zip && unzip kdb.zip \
     && if [ $(uname -a | grep -c "x86_64") -gt 0 ]; then \
