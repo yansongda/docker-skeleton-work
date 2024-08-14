@@ -32,13 +32,13 @@ RUN set -ex \
         # for dm
         mkdir -p /usr/lib64/libdem/ && cp /tmp/extensions/dm/x86/* /usr/lib64/libdem/; \
         mkdir -p /etc/ld.so.conf.d && echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf; \
-        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && rm -rf /etc/ld.so.cache && ldconfig -n /etc/ld.so.conf.d; \
+        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && rm -rf /etc/ld.so.cache && ldconfig; \
         cp /tmp/extensions/dm/x86/php74_pdo_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
         cp /tmp/extensions/dm/x86/libphp74_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/; \
         echo "extension=php74_pdo_dm" >> /usr/local/etc/php/conf.d/pdo_dm.ini; \
         echo "extension=libphp74_dm" >> /usr/local/etc/php/conf.d/pdo_dm.ini; \
         # For me
-        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && php --ri php74_pdo_dm && sox --version; \
+        php --ri rdkafka && php --ri sqlsrv && php --ri pdo_sqlsrv && php --ri pdo_kdb && sox --version; \
     else \
         # for kdb
         cp /tmp/extensions/kdb/arm64/* /lib/; \
