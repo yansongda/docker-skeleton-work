@@ -17,11 +17,13 @@ RUN set -ex \
         cp /tmp/extensions/kdb/x86/* /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
         echo "extension=pdo_kdb" > /usr/local/etc/php/conf.d/pdo_kdb.ini; \
         # for dm
-        mkdir -p /etc/ld.so.conf.d && cp /tmp/extensions/dm/x86/* /etc/ld.so.conf.d/; \
-        echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf && rm -rf /etc/ld.so.cache; \
-        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && ldconfig -n /etc/ld.so.conf.d; \
+        mkdir -p /usr/lib64/libdem/ && cp /tmp/extensions/dm/x86/* /usr/lib64/libdem/; \
+        mkdir -p /etc/ld.so.conf.d && echo "/usr/lib64/libdem" > /etc/ld.so.conf.d/libdem.conf; \
+        echo "CHAR_CODE=(PG_UTF8)" > /etc/dm_svc.conf && rm -rf /etc/ld.so.cache && ldconfig -n /etc/ld.so.conf.d; \
         cp /tmp/extensions/dm/x86/php81_pdo_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
-        echo "extension=php81_pdo_dm" > /usr/local/etc/php/conf.d/pdo_dm.ini; \
+        cp /tmp/extensions/dm/x86/libphp74_dm.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/; \
+        echo "extension=php81_pdo_dm" >> /usr/local/etc/php/conf.d/pdo_dm.ini; \
+        echo "extension=libphp74_dm" >> /usr/local/etc/php/conf.d/pdo_dm.ini; \
         # For me
         php --ri pdo_kdb && php --ri php81_pdo_dm; \
     else \
