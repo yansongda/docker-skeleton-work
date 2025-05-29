@@ -15,8 +15,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.4'
-          - '8.1'
+          - '8.3'
         platform:
           - linux/amd64
           - linux/arm64
@@ -45,7 +44,7 @@ jobs:
           docker tag yansongda-work/skeleton registry.cn-shenzhen.aliyuncs.com/yansongda-work/skeleton:$tag
       - name: Push the image to aliyun registry
         run: |
-          echo $ALIYUN_IMAGE_TOKEN | docker login --username=me@yansongda.cn registry.cn-shenzhen.aliyuncs.com --password-stdin
+          echo $ALIYUN_IMAGE_TOKEN | docker login --username=yansongda registry.cn-shenzhen.aliyuncs.com --password-stdin
           docker push registry.cn-shenzhen.aliyuncs.com/yansongda-work/skeleton:$tag
           docker logout
   manifest:
@@ -57,8 +56,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '7.4'
-          - '8.1'
+          - '8.3'
     env:
       PLATFORMS: "linux/arm64 linux/amd64"
     steps:
@@ -84,6 +82,6 @@ jobs:
           docker manifest create registry.cn-shenzhen.aliyuncs.com/yansongda-work/skeleton:$tag $aliyun
       - name: Push the manifest to aliyun registry
         run: |
-          echo $ALIYUN_IMAGE_TOKEN | docker login --username=me@yansongda.cn registry.cn-shenzhen.aliyuncs.com --password-stdin
+          echo $ALIYUN_IMAGE_TOKEN | docker login --username=yansongda registry.cn-shenzhen.aliyuncs.com --password-stdin
           docker manifest push registry.cn-shenzhen.aliyuncs.com/yansongda-work/skeleton:$tag
           docker logout
