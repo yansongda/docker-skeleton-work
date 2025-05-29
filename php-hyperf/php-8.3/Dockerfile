@@ -2,8 +2,6 @@ FROM yansongda/php:cli-8.3-alpine
 
 LABEL maintainer="yansongda <me@yansongda.cn>"
 
-COPY extensions /tmp/extensions
-
 RUN set -ex \
     && uname -a \
     && echo "swoole.use_shortname = 'Off'" >> /usr/local/etc/php/php.ini \
