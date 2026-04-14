@@ -2,8 +2,9 @@ name: Docker Image > php-hyperf
 
 on:
   push:
-    branchs:
+    branches:
       - main
+  workflow_dispatch:
 
 env:
   ALIYUN_IMAGE_TOKEN: ${{ secrets.ALIYUN_IMAGE_ACCESSTOKEN }}
