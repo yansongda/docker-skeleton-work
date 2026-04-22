@@ -6,6 +6,7 @@ RUN set -ex \
     && uname -a \
     && echo "swoole.use_shortname = 'Off'" >> /usr/local/etc/php/php.ini \
     && sed -i 's/memory_limit = 512M/memory_limit = 1024M/g' /usr/local/etc/php/php.ini \
+    && printf '\n[openssl_init]\nssl_conf = ssl_sect\n\n[ssl_sect]\nsystem_default = system_default_sect\n\n[system_default_sect]\nOptions = UnsafeLegacyRenegotiation\n' >> /etc/ssl/openssl.cnf \
     && apk add -U --no-cache --virtual .build-deps $DEPENDENCIES \
     && apk add -U --no-cache imap-dev \
     && docker-php-ext-configure imap --with-imap --with-imap-ssl \
