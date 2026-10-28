@@ -9,7 +9,7 @@ RUN set -ex \
     && printf '\n[openssl_init]\nssl_conf = ssl_sect\n\n[ssl_sect]\nsystem_default = system_default_sect\n\n[system_default_sect]\nOptions = UnsafeLegacyRenegotiation\n' >> /etc/ssl/openssl.cnf \
     # 临时切换到 Alpine 官方源，避免 USTC 镜像 DNS 解析失败
     && sed -i 's/mirrors.ustc.edu.cn\/alpine/dl-cdn.alpinelinux.org\/alpine/g' /etc/apk/repositories \
-    && apk add -U --no-cache --virtual .build-deps $DEPENDENCIES \
+    && apk add -U --no-cache --virtual .build-deps $DEPENDENCIES openssl-dev \
     && apk add -U --no-cache imap-dev \
     && docker-php-ext-configure imap --with-imap --with-imap-ssl \
     && docker-php-ext-install imap \
